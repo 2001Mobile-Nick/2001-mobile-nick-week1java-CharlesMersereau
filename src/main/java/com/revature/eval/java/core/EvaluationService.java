@@ -108,7 +108,7 @@ public class EvaluationService {
 	 * C, M, P = 3; F, H, V, W, Y = 4; K = 5; J, X = 8; Q, Z = 10; Examples
 	 * "cabbage" should be scored as worth 14 points:
 	 * 
-	 * 3 points for C, 1 point for A, twice 3 points for B, twice 2 points for G, 1
+	 * 3 points for C, twice 1 point for A, twice 3 points for B, 2 points for G, 1
 	 * point for E And to total:
 	 * 
 	 * 3 + 2*1 + 2*3 + 2 + 1 = 3 + 2 + 6 + 3 = 5 + 9 = 14
@@ -117,8 +117,29 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int score = 0;
+		String c;
+		string = string.toUpperCase();
+		
+		for (int i = 0; i < string.length(); i++) {
+			c = "" + string.charAt(i);
+			if ("AEIOULNRST".contains(c)) {
+				score += 1;
+			} else if ("DG".contains(c)) {
+				score += 2;
+			} else if ("BCMP".contains(c)) {
+				score += 3;
+			} else if ("FHVWY".contains(c)) {
+				score += 4;
+			} else if ("K".contains(c)) {
+				score += 5;
+			} else if ("JX".contains(c)) {
+				score += 8;
+			} else if ("QZ".contains(c)) {
+				score += 10;
+			}
+		}
+		return score;
 	}
 
 	/**
