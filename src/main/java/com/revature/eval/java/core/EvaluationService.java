@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -206,8 +207,32 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String c;
+		String removedNonAlpha = "";
+		
+		for (int i = 0; i < string.length(); i++) {
+			c = "" + string.charAt(i);
+			if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ ".contains(c.toUpperCase())) {
+				 removedNonAlpha += c;
+			} else {
+				removedNonAlpha += " ";
+			}
+		}
+		
+		String[] words = removedNonAlpha.split("\\s+");
+		Map<String, Integer> wordCounts = new HashMap<String, Integer>();
+		Integer count;
+		
+		for (String word : words) {
+			if (wordCounts.containsKey(word)) {
+				count = wordCounts.get(word);
+				count++;
+				wordCounts.put(word, count);
+			} else {
+				wordCounts.put(word,  1);
+			}
+		}
+		return wordCounts;
 	}
 
 	/**
