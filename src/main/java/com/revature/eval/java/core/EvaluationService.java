@@ -173,9 +173,27 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
-	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public String cleanPhoneNumber (String string) {
+		String phoneNumber = "";
+		String c;
+		string = string.toUpperCase();
+		
+		for (int i = 0; i < string.length(); i++) {
+			c = "" + string.charAt(i);
+			if ("0123456789".contains(c)) {
+				phoneNumber += c;
+			} else if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".contains(c)) {
+				throw new IllegalArgumentException("cannot contain non digits");
+			}
+		}
+		if (phoneNumber.length() > 11) {
+			throw new IllegalArgumentException("cannot have more than 11 digits");
+		} else if (phoneNumber.length() == 11) {
+			phoneNumber = phoneNumber.substring(1);
+		} else if (phoneNumber.length() < 10) {
+			throw new IllegalArgumentException("cannot have less than 10 digits");
+		}
+		return phoneNumber;
 	}
 
 	/**
