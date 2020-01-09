@@ -331,8 +331,33 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String[] words = string.split("\\s+");
+		String pigPhrase = "";
+		
+		for (int j = 0; j < words.length; j++) {
+			String pigWord = "";
+			String holder = "";
+			String word = words[j];
+			for (int i = 0; i < word.length(); i++) {
+				if("AEIOU".contains("" + word.toUpperCase().charAt(i))) {
+					pigWord = word.substring(i);
+					break;
+				} else {
+					if (word.toUpperCase().charAt(i) == "Q".charAt(0) && word.toUpperCase().charAt(i+1) == "U".charAt(0)) {
+						holder += "" + word.charAt(i) + word.charAt(i+1);
+						i++;
+					} else {
+						holder += word.charAt(i);
+					}
+				}
+			}
+			if(j > 0) {
+				pigPhrase += " ";
+			}
+			pigPhrase += pigWord + holder + "ay";
+		}
+		
+		return pigPhrase;
 	}
 
 	/**
