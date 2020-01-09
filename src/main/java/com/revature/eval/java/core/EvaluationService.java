@@ -438,6 +438,8 @@ public class EvaluationService {
 	 */
 	static class RotationalCipher {
 		private int key;
+		private final String lower = "abcdefghijklmnopqrstuvwxyz";
+		private final String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 		public RotationalCipher(int key) {
 			super();
@@ -445,8 +447,21 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			String result = "";
+			
+			for (int i = 0; i < string.length(); i++) {
+				if(lower.indexOf(string.charAt(i)) > -1) {
+					int codeIndex = (lower.indexOf(string.charAt(i)) + this.key) % 26;
+					result += lower.charAt(codeIndex);
+				} else if(upper.indexOf(string.charAt(i)) > -1) {
+					int codeIndex = (upper.indexOf(string.charAt(i)) + this.key) % 26;
+					result += upper.charAt(codeIndex);
+				} else {
+					result += string.charAt(i);
+				}
+				
+			}
+			return result;
 		}
 
 	}
