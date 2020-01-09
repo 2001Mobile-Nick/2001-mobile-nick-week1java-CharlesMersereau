@@ -229,7 +229,7 @@ public class EvaluationService {
 				count++;
 				wordCounts.put(word, count);
 			} else {
-				wordCounts.put(word,  1);
+				wordCounts.put(word, 1);
 			}
 		}
 		return wordCounts;
@@ -272,10 +272,30 @@ public class EvaluationService {
 	 */
 	static class BinarySearch<T> {
 		private List<T> sortedList;
+		
+		private int search(int left, int mid, int right, Comparable<T> t) {
+			if (t.compareTo(this.sortedList.get(mid)) == 0) {
+				return mid;
+			} else if ((t.compareTo(this.sortedList.get(mid)) < 0)) {
+				right = mid - 1;
+				mid = (left + right) / 2;
+				return search(left, mid, right, t);
+			} else if ((t.compareTo(this.sortedList.get(mid)) > 0)) {
+				left = mid + 1;
+				mid = (left + right) / 2;
+				return search(left, mid, right, t);
+			} else {
+				return -1;
+			}
+		}
 
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
-			return 0;
+			int left = 0;
+			int right = this.sortedList.size() - 1;
+			int mid = right / 2;
+			Comparable<T> c = (Comparable)t;
+			
+			return search(left, mid, right, c);
 		}
 
 		public BinarySearch(List<T> sortedList) {
