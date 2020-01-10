@@ -479,8 +479,30 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		if(i <= 0) {
+			throw new IllegalArgumentException();
+		}
+		int nth = 2;
+		int count = 1;
+		int a = 2;
+		int b = 3;
+		while(count < i) {
+			while(a < b) {
+				if((b % a) == 0) {
+					a = 2;
+					b++;
+					continue;
+				}  else {
+					a++;
+				}
+			}
+			nth = b;
+			a = 2;
+			b++;
+			count++;
+		}
+		
+		return nth;
 	}
 
 	/**
@@ -508,6 +530,8 @@ public class EvaluationService {
 	 *
 	 */
 	static class AtbashCipher {
+		String decodedAlphabet = "abcdefghijklmnopqrstuvwxyz";
+		String encodedAlphabet = "zyxwvutsrpqonmlkjihgfedcba";
 
 		/**
 		 * Question 13
@@ -516,8 +540,33 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			String lowerCaseString = string.toLowerCase();
+			String alphabet = "abcdefghijklmnopqrstuvwxyz";
+			String digits = "0123456789";
+			String encoded = "";
+			int spaceFlag = 0;
+			
+			for (int i = 0; i < lowerCaseString.length(); i++) {
+				if(alphabet.indexOf(lowerCaseString.charAt(i)) > -1 
+					|| digits.indexOf(lowerCaseString.charAt(i)) > -1) {
+					
+					if(spaceFlag == 5) {
+						encoded += " ";
+						spaceFlag = 0;
+					}
+				}
+				if(alphabet.indexOf(lowerCaseString.charAt(i)) > -1) {
+					int index = 25 - alphabet.indexOf(lowerCaseString.charAt(i));
+					encoded += alphabet.charAt(index);
+					spaceFlag++;
+				} else if (digits.indexOf(lowerCaseString.charAt(i)) > -1) {
+					encoded += lowerCaseString.charAt(i);
+					spaceFlag++;
+				}
+				
+			}
+
+			return encoded;
 		}
 
 		/**
@@ -527,8 +576,21 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String decode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			String lowerCaseString = string.toLowerCase();
+			String alphabet = "abcdefghijklmnopqrstuvwxyz";
+			String digits = "0123456789";
+			String decoded = "";
+
+			for (int i = 0; i < lowerCaseString.length(); i++) {
+				if(alphabet.indexOf(lowerCaseString.charAt(i)) > -1) {
+					int index = 25 - alphabet.indexOf(lowerCaseString.charAt(i));
+					decoded += alphabet.charAt(index);
+				} else if (digits.indexOf(lowerCaseString.charAt(i)) > -1) {
+					decoded += lowerCaseString.charAt(i);
+				}
+			}
+			
+			return decoded;
 		}
 	}
 
@@ -555,7 +617,30 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
+//		String digits = "1234567890";
+//		String strippedISBN = "";
+//		for (int i = 0; i < string.length(); i++) {
+//			if (digits.indexOf(string.charAt(i)) > -1) {
+//				strippedISBN += string.charAt(i);
+//			} else if ("X" == ("" + string.charAt(i)) && strippedISBN.length() == 9) {
+//				strippedISBN += "X";
+//			}
+//		}
+//		
+//		if (strippedISBN.length() != 10) {
+//			return false;
+//		}
+//		
+//		int sum = 0;
+//		
+//		for (int i = 0; i < strippedISBN.length(); i++) {
+//			if ("X" == ("" + strippedISBN.charAt(i))) {
+//				sum += 10;
+//			}
+//			sum += Math.pow(Integer.parseInt("" + strippedISBN.charAt(i)), 10 - i);
+//		}
+//		
+//		return sum % 11 == 0;
 		return false;
 	}
 
