@@ -617,31 +617,31 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-//		String digits = "1234567890";
-//		String strippedISBN = "";
-//		for (int i = 0; i < string.length(); i++) {
-//			if (digits.indexOf(string.charAt(i)) > -1) {
-//				strippedISBN += string.charAt(i);
-//			} else if ("X" == ("" + string.charAt(i)) && strippedISBN.length() == 9) {
-//				strippedISBN += "X";
-//			}
-//		}
-//		
-//		if (strippedISBN.length() != 10) {
-//			return false;
-//		}
-//		
-//		int sum = 0;
-//		
-//		for (int i = 0; i < strippedISBN.length(); i++) {
-//			if ("X" == ("" + strippedISBN.charAt(i))) {
-//				sum += 10;
-//			}
-//			sum += Math.pow(Integer.parseInt("" + strippedISBN.charAt(i)), 10 - i);
-//		}
-//		
-//		return sum % 11 == 0;
-		return false;
+		String digits = "1234567890";
+		String strippedISBN = "";
+		for (int i = 0; i < string.length(); i++) {
+			if (digits.indexOf(string.charAt(i)) > -1) {
+				strippedISBN += string.charAt(i);
+			} else if ("X".equals("" + string.charAt(i)) && strippedISBN.length() == 9) {
+				strippedISBN += "X";
+			}
+		}
+		
+		if (strippedISBN.length() != 10) {
+			return false;
+		}
+		
+		int sum = 0;
+		
+		for (int i = 0; i < strippedISBN.length(); i++) {
+			if ("X".equals("" + strippedISBN.charAt(i))) {
+				sum += 10;
+			} else {
+				sum += Math.pow(Integer.parseInt("" + strippedISBN.charAt(i)), 10 - i);
+			}
+		}
+		
+		return sum % 11 == 0;
 	}
 
 	/**
@@ -658,8 +658,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		String alphabet = "abcdefghijklmnopqrstuvwxyz";
+		String letters = "";
+		String lowerCaseString = string.toLowerCase();
+		
+		for (int i = 0; i < lowerCaseString.length(); i++) {
+			if (alphabet.indexOf("" + lowerCaseString.charAt(i)) > -1) {
+				if (letters.indexOf("" + lowerCaseString.charAt(i)) == -1) {
+					letters += string.charAt(i);
+				}
+			}
+		}
+		return letters.length() == 26;
 	}
 
 	/**
