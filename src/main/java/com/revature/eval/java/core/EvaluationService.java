@@ -809,7 +809,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
+		String[] words = string.substring(0,string.length()-1).split("\\s+");
+		int firstArg = Integer.parseInt(words[2]);
+		String operator = words[3];
+		if(operator.equals("plus")) {
+			return firstArg + Integer.parseInt(words[4]);
+		} else if (operator.contentEquals("minus")) {
+			return firstArg - Integer.parseInt(words[4]);
+		} else if (operator.contentEquals("multiplied")) {
+			return firstArg * Integer.parseInt(words[5]);		
+		} else if (operator.contentEquals("divided")){
+			return firstArg / Integer.parseInt(words[5]);
+		}
 		return 0;
 	}
 
