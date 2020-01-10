@@ -1,6 +1,8 @@
 package com.revature.eval.java.core;
 
+import java.time.Duration;
 import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -681,8 +683,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
-		return null;
+        return given.plus(Duration.ofSeconds(1000000000));
 	}
 
 	/**
