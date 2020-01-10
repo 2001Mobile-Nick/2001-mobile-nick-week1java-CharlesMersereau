@@ -32,7 +32,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		String[] words = phrase.split(" ");
+		String[] words = phrase.toUpperCase().split("[-\\s+]");
 		String acr = "";
 		for (String word : words) {
 			acr += word.charAt(0);
@@ -699,8 +699,25 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		ArrayList<Integer> uniqueMultiples =  new ArrayList<Integer>();
+		int currentMultiple = 0;
+		
+		for (int j = 0; j < set.length; j++) {
+			currentMultiple = set[j];
+			while (currentMultiple < i) {
+				if (!uniqueMultiples.contains(currentMultiple)) {
+					uniqueMultiples.add(currentMultiple);
+				}
+				currentMultiple += set[j];
+			}
+		}
+		
+		int sum = 0;
+		for (Integer multiple : uniqueMultiples) {
+			sum += multiple;
+		}
+		
+		return sum;
 	}
 
 	/**
@@ -740,8 +757,28 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		String allowable = "1234567890 ";
+		ArrayList<Integer> nums = new ArrayList<Integer>();
+		for (int i = 0; i < string.length(); i++) {
+			if (allowable.indexOf(string.charAt(i)) > -1) {
+				if (allowable.substring(0,(allowable.length()-1)).indexOf(string.charAt(i)) > -1) {
+					nums.add(Integer.parseInt("" + string.charAt(i)));
+				}
+			} else {
+				return false;
+			}
+		}
+		
+		int sum = 0;
+		for (int i = nums.size() - 1; i >= 0; i--) {
+			if((nums.size() - i) % 2 == 0) {
+				int doubled = 2*nums.get(i);
+				sum += (doubled > 9 ? doubled - 9 : doubled);
+			} else {
+				sum += nums.get(i);
+			}
+		}
+		return (sum > 0) && sum % 10 == 0;
 	}
 
 	/**
